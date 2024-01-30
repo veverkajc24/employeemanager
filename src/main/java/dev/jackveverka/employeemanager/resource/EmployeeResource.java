@@ -1,4 +1,4 @@
-package dev.jackveverka.employeemanager;
+package dev.jackveverka.employeemanager.resource;
 
 import java.util.List;
 import dev.jackveverka.employeemanager.model.Employee;
@@ -16,7 +16,7 @@ public class EmployeeResource {
         this.employeeService = employeeService;
     }
 
-    @GetMapping("all")
+    @GetMapping("/all")
     public ResponseEntity<List<Employee>> getAllemployees() {
         List<Employee> employees = employeeService.findAllEmployees();
         return new ResponseEntity<>(employees, HttpStatus.OK);
