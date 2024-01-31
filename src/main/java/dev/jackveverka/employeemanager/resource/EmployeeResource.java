@@ -5,6 +5,7 @@ import dev.jackveverka.employeemanager.model.Employee;
 import dev.jackveverka.employeemanager.service.EmployeeService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -34,13 +35,15 @@ public class EmployeeResource {
         return new ResponseEntity<>(employee1, HttpStatus.CREATED);
     }
 
-    @PostMapping("/update")
+    @PutMapping("/update")
+    @Transactional
     public ResponseEntity<Employee> updateEmployee(@RequestBody Employee employee) {
         Employee employee1 = employeeService.updateEmployee(employee);
         return new ResponseEntity<>(employee1, HttpStatus.OK);
     }
 
-    @PostMapping("/delete/{id}")
+    @DeleteMapping("/delete/{id}")
+    @Transactional
     public ResponseEntity<?> deleteEmployee(@PathVariable("id") Long id) {
         employeeService.deleteEmployee(id);
         return new ResponseEntity<>(HttpStatus.OK);
